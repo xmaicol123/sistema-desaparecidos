@@ -1,0 +1,40 @@
+create table admin 
+(
+	cod_admin int (10) not null auto_increment,
+	nombre_admin varchar (60),
+	usuario_admin varchar (60),
+	password text,
+	primary key (cod_admin)
+);
+
+create table usuario 
+(
+	cod_usuario int (10) not null auto_increment,
+	nombre_usuario varchar (60),
+	usuario_usuario varchar (60),
+	password_usuario text,
+	fecha_nacimiento date,
+	celular int (10),
+	email varchar (60),
+	primary key (cod_usuario)
+);
+
+create table desaparecido 
+(
+	cod_desaparecido int (10) not null auto_increment,
+	cod_usuario_table int (10) not null,
+	nombre_desaparecido varchar (60),
+	sexo varchar (60),
+	edad int (10),
+	estatura decimal (6.4),
+	tez varchar (60),
+	ojos varchar (60),
+	cabello varchar (60),
+	fecha_nacimiento date,
+	señas_particulares varchar (60),
+	circunstancia text,
+	fecha_registro date,
+	primary key (cod_desaparecido),
+	foreign key (cod_usuario_table) references usuario (cod_usuario)
+);
+
