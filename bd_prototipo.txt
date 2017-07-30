@@ -1,40 +1,291 @@
-create table admin 
-(
-	cod_admin int (10) not null auto_increment,
-	nombre_admin varchar (60),
-	usuario_admin varchar (60),
-	password text,
-	primary key (cod_admin)
-);
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 30-07-2017 a las 20:47:10
+-- Versión del servidor: 5.7.17-log
+-- Versión de PHP: 5.6.30
 
-create table usuario 
-(
-	cod_usuario int (10) not null auto_increment,
-	nombre_usuario varchar (60),
-	usuario_usuario varchar (60),
-	password_usuario text,
-	fecha_nacimiento date,
-	celular int (10),
-	email varchar (60),
-	primary key (cod_usuario)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-create table desaparecido 
-(
-	cod_desaparecido int (10) not null auto_increment,
-	cod_usuario_table int (10) not null,
-	nombre_desaparecido varchar (60),
-	sexo varchar (60),
-	edad int (10),
-	estatura decimal (6.4),
-	tez varchar (60),
-	ojos varchar (60),
-	cabello varchar (60),
-	fecha_nacimiento date,
-	señas_particulares varchar (60),
-	circunstancia text,
-	fecha_registro date,
-	primary key (cod_desaparecido),
-	foreign key (cod_usuario_table) references usuario (cod_usuario)
-);
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `bd_prototipo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `desaparecido`
+--
+
+CREATE TABLE `desaparecido` (
+  `cod_desaparecido` int(10) NOT NULL,
+  `cod_usuario_table` int(10) NOT NULL,
+  `imagen` text,
+  `nombre_desaparecido` varchar(60) DEFAULT NULL,
+  `sexo` varchar(60) DEFAULT NULL,
+  `edad` int(10) DEFAULT NULL,
+  `estatura` varchar(20) DEFAULT NULL,
+  `tez` varchar(60) DEFAULT NULL,
+  `ojos` varchar(60) DEFAULT NULL,
+  `cabello` varchar(60) DEFAULT NULL,
+  `fecha_desaparicion` date DEFAULT NULL,
+  `señas_particulares` varchar(60) DEFAULT NULL,
+  `vestimenta` text,
+  `circunstancia` text,
+  `fecha_registro` date DEFAULT NULL,
+  `estado_desaparecido` enum('Desaparecido','Aparecido') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `desaparecido`
+--
+
+INSERT INTO `desaparecido` (`cod_desaparecido`, `cod_usuario_table`, `imagen`, `nombre_desaparecido`, `sexo`, `edad`, `estatura`, `tez`, `ojos`, `cabello`, `fecha_desaparicion`, `señas_particulares`, `vestimenta`, `circunstancia`, `fecha_registro`, `estado_desaparecido`) VALUES
+(13, 14, 'imagen1.jpg', 'Maria Lizzy Claros Chavez', 'Mujer', 27, '1.65', 'Morena', 'Negros', 'Cabello De Color Negro', '2017-06-15', 'Sin Detalle', 'Bluza Azul y pantalo Jeans', 'Cualquier Informacion Comunicarse a Los Numeros: 69150073', '2017-07-28', 'Desaparecido'),
+(14, 14, 'imagen2.jpg', 'Jazmin Valdivieso Rojas', 'Mujer', 23, '1.70', 'Morena Clara', 'Negros', 'Sin Detalle', '2017-02-15', 'Lunar en la Frente', 'Sin Detalle', 'Cualquier Informacion Comunicarse a Los Numeros: 85785965', '2017-07-28', 'Desaparecido'),
+(15, 14, 'imagen3.jpg', 'Vanesa Choque', 'Mujer', 28, '1.50', 'Morena Clara', 'Negros', 'Sin Detalle', '2016-06-08', 'Sin Detalle', 'Sin Detalle', 'Cualquier Informacion Comunicarse a Los Numeros: 68596588', '2017-07-28', 'Desaparecido'),
+(16, 14, 'Foto-JORNADA-820x495.jpg', 'Juan Carlos Arojas', 'Hombre', 56, '1.60', 'Morena', 'Negros', 'Corto', '2017-07-28', 'Sin Detalle', 'Sin Detalle', 'Cualquier Informacion Comunicarse a Los Numeros: 21458963', '0000-00-00', 'Desaparecido'),
+(17, 14, 'lobaton6.jpg', 'Roni Mamani', 'Hombre', 26, '1.60', 'Blanca', 'Cafes', 'Corto', '2014-05-06', 'Sin Detalle', 'Sin Detalle', 'Cualquier Informacion Comunicarse a Los Numeros: 22589654', '0000-00-00', 'Desaparecido');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `encontrado`
+--
+
+CREATE TABLE `encontrado` (
+  `cod_encontrado` int(10) NOT NULL,
+  `cod_usuario_table` int(10) NOT NULL,
+  `imagen` text,
+  `nombre_encontrado` varchar(60) DEFAULT NULL,
+  `sexo` varchar(60) DEFAULT NULL,
+  `edad` int(10) DEFAULT NULL,
+  `estatura` varchar(20) DEFAULT NULL,
+  `tez` varchar(60) DEFAULT NULL,
+  `ojos` varchar(60) DEFAULT NULL,
+  `cabello` varchar(60) DEFAULT NULL,
+  `señas_particulares` varchar(60) DEFAULT NULL,
+  `vestimenta` text,
+  `circunstancia` text,
+  `fecha_registro` date DEFAULT NULL,
+  `estado_persona` enum('Busqueda','Localizada') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `encontrado`
+--
+
+INSERT INTO `encontrado` (`cod_encontrado`, `cod_usuario_table`, `imagen`, `nombre_encontrado`, `sexo`, `edad`, `estatura`, `tez`, `ojos`, `cabello`, `señas_particulares`, `vestimenta`, `circunstancia`, `fecha_registro`, `estado_persona`) VALUES
+(6, 14, 'imagen10.jpeg', 'Sin Detalle', 'Hombre', 65, '1.60', 'Morena', 'Negros', 'Cabello Blanco', 'Sin Detalles', 'Viste De Camisa', 'Esta persona esta hubicada en la zona de San Carlos, no recuerda su nombre por favor familiares o personas que lo reconoscan comunicarse al cel. 78596587', '2017-07-28', 'Busqueda');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensaje_deaparecido`
+--
+
+CREATE TABLE `mensaje_deaparecido` (
+  `cod_mensaje_desaparecido` int(10) NOT NULL,
+  `cod_desaparecido_table` int(10) NOT NULL,
+  `mensaje_1` text,
+  `mensaje_2` text,
+  `mensaje_3` text,
+  `mensaje_4` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `mensaje_deaparecido`
+--
+
+INSERT INTO `mensaje_deaparecido` (`cod_mensaje_desaparecido`, `cod_desaparecido_table`, `mensaje_1`, `mensaje_2`, `mensaje_3`, `mensaje_4`) VALUES
+(1, 17, 'Roni Mamani', 'San carlos', 'san carlos', 'san carlos'),
+(2, 17, 'Roni Mamani', 'Lo vi por la plaza principal de Santa cruz', 'el dia sabado 25 de mayo', 'era exactamente por la iglesia, lo vi acompañado de dos personas el 25 de mayo a hrs. 06:00 pm'),
+(3, 14, 'Jazmin Valdivieso Rojas', 'Por Montero', 'no me acuerdo perfectamente era un sabado o domingo.', 'por la ciudad de montero, no me acuerdo la fecha perfectamente.');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensaje_encontrado`
+--
+
+CREATE TABLE `mensaje_encontrado` (
+  `cod_mensaje_encontrado` int(10) NOT NULL,
+  `cod_encontrado_table` int(10) NOT NULL,
+  `mensaje_1` text,
+  `mensaje_2` text,
+  `mensaje_3` text,
+  `mensaje_4` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+
+CREATE TABLE `tipo_usuario` (
+  `cod_tipo_usuario` int(10) NOT NULL,
+  `tipo_usuario` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`cod_tipo_usuario`, `tipo_usuario`) VALUES
+(1, 'Administrador'),
+(2, 'Usuario');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `cod_usuario` int(10) NOT NULL,
+  `cod_tipo_usuario_table` int(10) NOT NULL,
+  `nombre_usuario` varchar(60) DEFAULT NULL,
+  `usuario_usuario` varchar(60) DEFAULT NULL,
+  `password_usuario` text,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `celular` int(10) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`cod_usuario`, `cod_tipo_usuario_table`, `nombre_usuario`, `usuario_usuario`, `password_usuario`, `fecha_nacimiento`, `celular`, `email`) VALUES
+(7, 1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', '2017-07-14', 78596589, 'admin@hotmaill.com'),
+(8, 1, 'root', 'root', '63a9f0ea7bb98050796b649e85481845', '2017-07-22', 78596588, 'root@hotmail.com'),
+(14, 2, 'Usuario 1', 'usuario1', '122b738600a0f74f7c331c0ef59bc34c', '2017-07-08', 75391781, 'usuario1@hotmail.com');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `desaparecido`
+--
+ALTER TABLE `desaparecido`
+  ADD PRIMARY KEY (`cod_desaparecido`),
+  ADD KEY `cod_usuario_table` (`cod_usuario_table`);
+
+--
+-- Indices de la tabla `encontrado`
+--
+ALTER TABLE `encontrado`
+  ADD PRIMARY KEY (`cod_encontrado`),
+  ADD KEY `cod_usuario_table` (`cod_usuario_table`);
+
+--
+-- Indices de la tabla `mensaje_deaparecido`
+--
+ALTER TABLE `mensaje_deaparecido`
+  ADD PRIMARY KEY (`cod_mensaje_desaparecido`),
+  ADD KEY `cod_desaparecido_table` (`cod_desaparecido_table`);
+
+--
+-- Indices de la tabla `mensaje_encontrado`
+--
+ALTER TABLE `mensaje_encontrado`
+  ADD PRIMARY KEY (`cod_mensaje_encontrado`),
+  ADD KEY `cod_encontrado_table` (`cod_encontrado_table`);
+
+--
+-- Indices de la tabla `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`cod_tipo_usuario`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`cod_usuario`),
+  ADD KEY `cod_tipo_usuario_table` (`cod_tipo_usuario_table`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `desaparecido`
+--
+ALTER TABLE `desaparecido`
+  MODIFY `cod_desaparecido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT de la tabla `encontrado`
+--
+ALTER TABLE `encontrado`
+  MODIFY `cod_encontrado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `mensaje_deaparecido`
+--
+ALTER TABLE `mensaje_deaparecido`
+  MODIFY `cod_mensaje_desaparecido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `mensaje_encontrado`
+--
+ALTER TABLE `mensaje_encontrado`
+  MODIFY `cod_mensaje_encontrado` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  MODIFY `cod_tipo_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `cod_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `desaparecido`
+--
+ALTER TABLE `desaparecido`
+  ADD CONSTRAINT `desaparecido_ibfk_1` FOREIGN KEY (`cod_usuario_table`) REFERENCES `usuario` (`cod_usuario`);
+
+--
+-- Filtros para la tabla `encontrado`
+--
+ALTER TABLE `encontrado`
+  ADD CONSTRAINT `encontrado_ibfk_1` FOREIGN KEY (`cod_usuario_table`) REFERENCES `usuario` (`cod_usuario`);
+
+--
+-- Filtros para la tabla `mensaje_deaparecido`
+--
+ALTER TABLE `mensaje_deaparecido`
+  ADD CONSTRAINT `mensaje_deaparecido_ibfk_1` FOREIGN KEY (`cod_desaparecido_table`) REFERENCES `desaparecido` (`cod_desaparecido`);
+
+--
+-- Filtros para la tabla `mensaje_encontrado`
+--
+ALTER TABLE `mensaje_encontrado`
+  ADD CONSTRAINT `mensaje_encontrado_ibfk_1` FOREIGN KEY (`cod_encontrado_table`) REFERENCES `encontrado` (`cod_encontrado`);
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`cod_tipo_usuario_table`) REFERENCES `tipo_usuario` (`cod_tipo_usuario`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
